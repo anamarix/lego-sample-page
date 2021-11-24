@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700;100;300&display=swap');
+    :root{
+    --yellow: #ffd602;
+    --red: #d5040a;
+    --blue: #036cb6;
+    }
+    * { box-sizing: border-box; margin:0; padding:0;}
+    body{
+        height:100vh;
+        margin:0;
+        overflow: hidden;
+        font-family: 'Lato',sans-serif;
+
+    }
+    .page{
+        position:relative;
+        height:100vh;
+        width:100%;
+
+    }
+    .container{
+        position:absolute;
+
+        z-index:1;
+        display: grid;
+        grid-template-columns: 55% 45%;
+        grid-template-rows: 20% 50% 30%;
+        grid-template-areas:
+        "nav aside"
+        "main aside"
+        "footer aside";
+        height: 100%;
+        width:100%;
+
+    }
+    .loader{
+        background-color: #ffd602;
+        width:100%;
+        height:100%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 3;
+
+        animation: loader 1.5s linear forwards;
+    }
+
+    @keyframes loader{
+        0%{
+            opacity:1;
+            visibility:visible;
+        }
+         85%{
+             opacity:1;
+             visibility:visible;
+         }
+        100%{
+            opacity:0;
+            visibility: hidden;
+        }
+
+    }
+    .loader div{
+        background: white;
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+        margin:10px;
+
+        animation:scaling 2s ease-in-out infinite;
+    }
+    @keyframes scaling{
+        0%{
+            transform:scale(0.2);
+        }
+        40%{
+            transform:scale(1);
+        }
+        50%{
+            transform:scale(1.2);
+        }
+        100%{
+            transform:scale(0.2);
+        }
+    }
+    .loader div:nth-child(1){
+        animation-delay:0.2s;
+    }
+    .loader div:nth-child(2){
+        animation-delay:0.3s;
+    }
+    .loader div:nth-child(3){
+        animation-delay:0.4s;
+    }
+    .navbar{
+        grid-area: nav;
+        display: flex;
+
+    }
+    .navbar__content{
+        display: flex;
+        align-items: center;
+        padding:0 0 0 80px;
+        width:100%;
+        transform:translateY(-200px);
+        animation: navbar 2s ease-in-out forwards;
+        animation-delay: 1s;
+
+    }
+    @keyframes navbar{
+        0%{
+            transform:translateY(-200px);
+        }
+        100%{
+            transform:translateY(0px);
+        }
+    }
+    .navbar__content img{
+        width:50px;
+    }
+    .navbar__content ul{
+        display: flex;
+        justify-content: space-evenly;
+        list-style: none;
+        padding:0;
+        width:650px;
+    }
+    .navbar__content ul li a{
+        color: var(--red);
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .main-content{
+        grid-area: main;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transform:translateY(-1000px);
+        animation: main-content 2s ease-in-out forwards;
+        animation-delay: 1s;
+        padding-left: 80px;
+
+    }
+    @keyframes main-content{
+        0%{
+            transform:translateY(-1000px);
+        }
+        100%{
+            transform:translateY(0px);
+        }
+    }
+    .main-content p:first-child{
+        font-size: 32px;
+        font-weight: 300;
+        margin: 0 0 -10px 50px;
+
+    }
+    .main-content p:last-child{
+        font-weight: 100;
+        width:60%;
+
+    }
+    .main-content h1{
+        font-size: 48px;
+        font-weight: 700;
+        margin: 0 0 30px 0px;
+
+    }
+    .side-content{
+        grid-area: aside;
+        display:grid;
+        grid-template-columns: repeat(6, 1fr);
+        align-items: center;
+    }
+    .side-content p{
+        transform:rotate(-90deg);
+        font-size: 30px;
+        grid-row: 1/2;
+        grid-column: 1/2;
+        opacity:0;
+        
+        animation: side-content-text 3s ease-in-out 2s forwards;
+    }
+    @keyframes side-content-text {
+        0% {
+            opacity:0;
+        }
+        100% {
+            opacity:1;
+        }
+    }
+    .side-content img{
+        width:100%;
+        grid-row: 1/2;
+        grid-column: 2/6;
+        transform: translateX(800px);
+        
+        animation: side-content-image 2s ease-in-out 1.5s forwards;
+    }
+    @keyframes side-content-image {
+        0% {
+            transform:translateX(2000px);
+        }
+        100% {
+            transform:translateX(0px);
+        }
+    }
+    .side-content div{
+        background-color: var(--yellow);
+        grid-row: 1/2;
+        grid-column: 4/7;
+        height:100%;
+    }
+    .footer{
+        grid-area: footer;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end;
+        background: var(--yellow);
+        border-radius: 0 70px 0 0;
+        transform: translateY(100%);
+
+
+        animation:footer 1s ease-in-out 3s forwards;
+    }
+    @keyframes footer {
+
+        0% {
+          transform:translateY(100%);
+        }
+         100% {
+            transform:translateX(0px);
+        }
+    }
+    .footer div img{
+        width:200px;
+        position: absolute;
+        bottom: 30px;
+    }
+
+    .footer div:hover img{
+        transform:scale(1.5) translateY(-20px);
+        cursor: pointer;
+    }
+    .footer div{
+        height:50%;
+        width:100px;
+        background-color: var(--blue);
+        border-radius: 30px 30px 0 0;
+        display: flex;
+        justify-content: center;
+    }
+    .hidden{
+        display: none !important;
+    }
+    .visible{
+        display: grid !important;
+    }
+    .modal{
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.5);
+        position: absolute;
+        z-index:4;
+        display:grid;
+        place-items:center;
+
+    }
+    .modal__content{
+        background: white;
+        width:50%;
+        height:50%;
+        display: grid;
+        place-items: center;
+    }
+    .modal__content--slider{
+        width:300px;
+        height:200px;
+        transform-style: preserve-3d;
+    }
+    .modal__content--close{
+        justify-self: end;
+        align-self: start;
+    }
+    .cards{
+        position: relative;
+        width:100%;
+        height:100%;
+    }
+    .card {
+        background: var(--yellow);
+        border-radius: 20%;
+        position:absolute;
+        left:0;
+        right:0;
+        margin:0 auto;
+        transition:transform 0.5s ease;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        width:50%;
+        height:100%;
+    }
+    .card img{
+        width:80%;
+        height:80%;
+    }
+    input[type=radio] {
+        visibility:hidden;
+    }
+    .buy-button{
+        width:150px;
+        height:60px;
+        border-radius:30px;
+        font-size: 14px;
+        font-weight: 700;
+        background: var(--red);
+        color:white;
+        border: none;
+        cursor: pointer;
+
+    }
+
+    #radio-1:checked ~ .cards #card1,
+    #radio-2:checked ~ .cards #card2,
+    #radio-3:checked ~ .cards #card3{
+        transform:translateX(0) scale(1.2);
+        opacity:1;
+        z-index:1;
+    }
+    #radio-1:checked ~ .cards #card2,
+    #radio-2:checked ~ .cards #card3,
+    #radio-3:checked ~ .cards #card1{
+        transform:translateX(40%) scale(0.8);
+        opacity:0.5;
+        z-index:0;
+    }
+    #radio-1:checked ~ .cards #card3,
+    #radio-2:checked ~ .cards #card1,
+    #radio-3:checked ~ .cards #card2{
+        transform:translateX(-40%) scale(0.8);
+        opacity:0.5;
+        z-index:0;
+    }
+
+</style>
+<body>
+    <div class="page">
+        <!--Main Content-->
+        <section class="container">
+            <nav class="navbar">
+                <div class="navbar__content">
+                    <img src="https://i.ibb.co/MMmDPXN/lego.png" alt="">
+                    <ul>
+                        <li><a href="/">EKSKLUZYWNE</a></li>
+                        <li><a href="/">NOWE</a></li>
+                        <li><a href="/"> KARTY PODARUNKOWE</a></li>
+                        <li><a href="/"> ZNAJDŹ SKLEP</a></li>
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <section class="main-content">
+                <p> Stwórz swojego</p>
+                <h1>Super Bohatera!</h1>
+                <p>Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.Pitu pitu, pitu pitu.</p>
+            </section>
+
+            <section class="side-content">
+                <p>Superman</p>
+                <img src="https://i.ibb.co/x16pz1x/super-man.png" alt="">
+                <div></div>
+            </section>
+
+
+            <section class="footer">
+                <div id="button1">
+                    <img src="https://i.ibb.co/tKWqw8J/spiderman.png" alt="">
+               </div>
+               <div id="button2">
+                <img src="https://i.ibb.co/Xzsdvgg/robin.png" alt="">
+                </div>
+                <div id="button3">
+                    <img src="https://i.ibb.co/M18p91c/batman.webp" alt="">
+               </div>
+            </section>
+
+
+        </section>
+         <!--Loader-->
+        <section class="loader">  
+            <div></div>
+            <div></div>
+            <div></div>
+        </section>
+        <!--Modal-->
+        <section class="modal hidden"> 
+        <div class="modal__content">
+            <img class="modal__content--close" src="https://img.icons8.com/office/30/000000/close-window.png"/>
+            <div class="modal__content--slider">
+                <input type="radio" name="slider1" id="radio-1" checked>
+                <input type="radio" name="slider1" id="radio-2">
+                <input type="radio" name="slider1" id="radio-3">
+
+                <div class="cards">
+                    <label for="radio-1" id="card1" class="card">
+                        <img src="https://i.ibb.co/tKWqw8J/spiderman.png" alt="">
+                    </label>
+                    <label for="radio-2" id="card2" class="card">
+                        <img src="https://i.ibb.co/Xzsdvgg/robin.png" alt="">
+                    </label>
+                    <label for="radio-3" id="card3" class="card">
+                        <img src="https://i.ibb.co/M18p91c/batman.webp" alt="">
+                    </label>
+                </div>
+                
+            </div>
+            <div>
+                <input type="button" class="buy-button" value="Chcę tego!">
+            </div>
+        </div>    
+        </section>
+    </div>
+</body>
+<script>
+    const modal = document.querySelector('.modal');
+    const button1 = document.querySelector('#button1');
+    const closeButton = document.querySelector('.modal__content--close');
+    const button2 = document.querySelector('#button2');
+    const button3 = document.querySelector('#button3');
+
+    button1.addEventListener('click', () => {
+        modal.classList.remove('hidden')
+        modal.classList.add('visible')
+    });
+    button2.addEventListener('click', () => {
+        modal.classList.remove('hidden')
+        modal.classList.add('visible')
+    });
+    button3.addEventListener('click', () => {
+        modal.classList.remove('hidden')
+        modal.classList.add('visible')
+    });
+    closeButton.addEventListener('click', () => {
+        console.log('here');
+        modal.classList.remove('visible');
+        modal.classList.add('hidden');
+    });
+</script>
+</html>
